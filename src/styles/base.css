@@ -1,0 +1,41 @@
+/* Stili di base della pagina. Colori e misure vengono da tokens.css. */
+body {
+  margin: 0;
+  padding: var(--space-3);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+h1 {
+  color: var(--color-accent);
+}
+
+.season-list {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  padding: 0;
+  list-style: none;
+}
+
+.season-card {
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.season-card dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+}
+
+.season-card dt {
+  color: var(--color-text-muted);
+}
+
+.status {
+  color: var(--color-text-muted);
+}

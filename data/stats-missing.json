@@ -1,0 +1,20 @@
+{
+  "note": "Giocatori senza le 7 statistiche Lv50 (stats: null). Generato dall'importazione: da controllare a mano.",
+  "players": [
+    {
+      "source": "ie1_s3",
+      "playerId": "96",
+      "name": "Neil Turner",
+      "reason": "nel file Lv50 senza valori (official_character_row_has_no_unique_attribute_link)"
+    },
+    {"source": "ie1_s3", "playerId": "custom_0001", "name": "Nakata", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4650", "name": "Lucas Star", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4655", "name": "Park Gom-bull", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4680", "name": "Seth Bael", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4681", "name": "Serge Atanas", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4735", "name": "Dani Ramos", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4744", "name": "Raúl Parejo", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4745", "name": "Marcos Canales", "reason": "id non presente nel file Lv50"},
+    {"source": "orion", "playerId": "4841", "name": "Mark Krueger", "reason": "id non presente nel file Lv50"}
+  ]
+}

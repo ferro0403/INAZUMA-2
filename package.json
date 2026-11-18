@@ -1,0 +1,13 @@
+{
+  "name": "inazuma-2",
+  "private": true,
+  "type": "module",
+  "description": "Gioco statico nel browser (moduli ES, nessuna build). Node serve solo per script e test.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "validate": "node scripts/validate-data.js",
+    "import": "node scripts/import-from-old-repo.js",
+    "importance": "node scripts/apply-importance.js"
+  },
+  "engines": { "node": ">=22" }
+}

@@ -1,0 +1,148 @@
+{
+  "note": "Dove si trovano i dati nel vecchio repo (ferro0403/INAZUMA-ROGUELIKE) e come vanno letti. Solo dati: nessuna regola di gioco qui.",
+  "seasonRegistry": {
+    "file": "js/season-registry.js",
+    "global": "SeasonRegistry",
+    "note": "Letto in una sandbox solo per avere nome, numero e ordine delle season (list())."
+  },
+  "seasons": [
+    {
+      "id": "ie1",
+      "database": "data/IE1_season_compact.json",
+      "signatureMoves": "data/IE1_moves.json"
+    },
+    {
+      "id": "ie1_s2",
+      "database": "data/IE1_S2_season_compact.json",
+      "signatureMoves": "data/IE1_S2_moves.json"
+    },
+    {
+      "id": "ie1_s3",
+      "database": "data/IE1_S3_season_compact.json",
+      "signatureMoves": "data/IE1_S3_moves.json"
+    },
+    {
+      "id": "ie2",
+      "database": "data/IE2_season_compact.json",
+      "signatureMoves": "data/IE2_moves.json"
+    },
+    {
+      "id": "orion",
+      "database": "data/ORION_season_compact.json",
+      "signatureMoves": "data/ORION_moves.json"
+    }
+  ],
+  "displayTeamNameOverrides": {
+    "note": "Nel vecchio gioco stavano in js/season-registry.js (DISPLAY_TEAM_NAME_OVERRIDES, non esportato): nome mostrato al posto di teamName.",
+    "ie1_s2": {
+      "alpine_ie2": "Alpine",
+      "raimon_inazuma_eleven_2": "Raimon"
+    }
+  },
+  "freeAgents": {
+    "id": "free_agents",
+    "file": "data/FREE_AGENTS_compact.json"
+  },
+  "playerVisuals": "data/PLAYER_VISUALS.json",
+  "fourMoves": {
+    "file": "js/road-to-glory/rtg-four-moves-runtime.js",
+    "constant": "PACKED",
+    "fallbackOrder": {
+      "note": "Copiato da SOURCE_ORDER del vecchio file: se una season non ha le mosse di un giocatore, si usano quelle della season precedente in elenco.",
+      "ie1": [
+        "ie1"
+      ],
+      "ie1_s2": [
+        "ie1_s2",
+        "ie1"
+      ],
+      "ie1_s3": [
+        "ie1_s3",
+        "ie1_s2",
+        "ie1"
+      ],
+      "ie2": [
+        "ie2"
+      ],
+      "orion": [
+        "orion",
+        "ie2"
+      ]
+    }
+  },
+  "rtgConfig": {
+    "file": "js/road-to-glory/rtg-config.js",
+    "global": "RoadToGloryConfig",
+    "constants": [
+      "MAIN_WIN_REWARD",
+      "SECONDARY_WIN_REWARD",
+      "SEASON_TRANSITION_REWARD",
+      "SEASON_COMPLETION_REWARD",
+      "MAIN_REWARDS_BY_STAGE",
+      "SECONDARY_REWARDS_BY_STAGE",
+      "CAMPAIGN_SEASONS"
+    ]
+  },
+  "seasonMetaKeysToLegacy": [
+    "exportType",
+    "generatedAt",
+    "version",
+    "source",
+    "summary",
+    "warnings",
+    "validation",
+    "compactFormat",
+    "compactSource",
+    "progressionFormat",
+    "progressionDescription",
+    "requiresProfileAwareRuntime",
+    "legacyPlayerCompatibility",
+    "seasonId",
+    "seasonName"
+  ],
+  "legacyFieldRule": {
+    "note": "Ogni campo il cui nome contiene una di queste parole (maiuscole/minuscole ignorate) va nel blocco legacy.",
+    "nameContains": [
+      "overall",
+      "level"
+    ],
+    "exactNames": [
+      "ratings",
+      "finalStats",
+      "category",
+      "teamStars",
+      "progressionCode",
+      "progressionSource",
+      "ratedPlayers",
+      "sourceRatedPlayers",
+      "cap",
+      "rarityWeights",
+      "duplicateRefunds",
+      "atLeast81",
+      "atMost80"
+    ]
+  },
+  "notImported": [
+    {
+      "path": "data/events/",
+      "reason": "Eventi (Halloween): esclusi dalla tappa 1 per richiesta."
+    },
+    {
+      "path": "data/rtg-halloween-occult-*.json",
+      "reason": "Dati dell'evento Halloween: esclusi dalla tappa 1."
+    },
+    {
+      "path": "data/DARK_ANGELS_team.json, data/DARK_ANGELS_lineup.json",
+      "reason": "Non letti da nessun file del vecchio gioco (Dark Angels gioca dentro IE1_S3, che e' importata). Da chiedere all'utente se servono."
+    },
+    {
+      "path": "data/PLAYER_KIT_VISUALS.json",
+      "reason": "Rimanda a immagini locali (assets/vr-players/...) del vecchio repo: niente asset copiati."
+    },
+    {
+      "path": "data/RTG_move_power_targets_169.json",
+      "reason": "File di riferimento per mosse non ancora assegnate: non assegna mosse a nessuno."
+    }
+  ],
+  "oldRepoName": "ferro0403/INAZUMA-ROGUELIKE"
+}

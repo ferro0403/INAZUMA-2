@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inazuma 2</title>
+  <link rel="stylesheet" href="src/styles/tokens.css">
+  <link rel="stylesheet" href="src/styles/base.css">
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <h1>Inazuma 2</h1>
+  <p id="status" class="status">Caricamento dati…</p>
+  <ul id="seasons" class="season-list"></ul>
+
+  <template id="season-card">
+    <li class="season-card">
+      <h2 data-field="name"></h2>
+      <dl>
+        <dt>Giocatori</dt><dd data-field="players"></dd>
+        <dt>Squadre</dt><dd data-field="teams"></dd>
+        <dt>Boss</dt><dd data-field="bosses"></dd>
+        <dt>Importanza</dt><dd data-field="importance"></dd>
+      </dl>
+    </li>
+  </template>
+</body>
+</html>

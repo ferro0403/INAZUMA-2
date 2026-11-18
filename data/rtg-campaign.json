@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "importedFrom": {
+    "repo": "ferro0403/INAZUMA-ROGUELIKE",
+    "commit": "77429e7cb9c6eb4cbdd2fb723da9defa4bec261f",
+    "file": ["js/road-to-glory/rtg-config.js"]
+  },
+  "MAIN_WIN_REWARD": 350,
+  "SECONDARY_WIN_REWARD": 200,
+  "SEASON_TRANSITION_REWARD": 1000,
+  "SEASON_COMPLETION_REWARD": 2000,
+  "MAIN_REWARDS_BY_STAGE": [350, 500, 650],
+  "SECONDARY_REWARDS_BY_STAGE": [200, 300, 400],
+  "CAMPAIGN_SEASONS": {"rtg-ie-trilogy": ["ie1", "ie1_s2", "ie1_s3"], "rtg-ares-orion": ["ie2", "orion"]}
+}
