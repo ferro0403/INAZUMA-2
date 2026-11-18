@@ -8,7 +8,6 @@ Non modificare a mano: si rigenera a ogni importazione.
 ### Inazuma Eleven 1 (`ie1`)
 
 - Giocatori: **157**, squadre: **10**, boss: 10, partite speciali: 0, profili: 0
-- Importanza: comune: 111, conosciuto: 35, protagonista: 11
 - Mosse per giocatore (numero: giocatori): 3: 1, 4: 156
 - Elementi scritti nei dati: Fuoco: 33, Montagna: 33, Albero: 51, Vento: 40
 - Senza statistiche Lv50: nessuno
@@ -17,7 +16,6 @@ Non modificare a mano: si rigenera a ogni importazione.
 ### Inazuma Eleven 2 (`ie1_s2`)
 
 - Giocatori: **203**, squadre: **17**, boss: 10, partite speciali: 7, profili: 230
-- Importanza: protagonista: 14, comune: 144, conosciuto: 45
 - Mosse per giocatore (numero: giocatori): 3: 1, 4: 202
 - Elementi scritti nei dati: Mountain: 30, Fire: 46, Forest: 67, Wind: 60
 - Senza statistiche Lv50: nessuno
@@ -26,7 +24,6 @@ Non modificare a mano: si rigenera a ogni importazione.
 ### Inazuma Eleven 3 (`ie1_s3`)
 
 - Giocatori: **584**, squadre: **41**, boss: 12, partite speciali: 7, profili: 584
-- Importanza: protagonista: 58, comune: 398, conosciuto: 128
 - Mosse per giocatore (numero: giocatori): 0: 3, 3: 5, 4: 576
 - Mosse prese da una season precedente (come nel vecchio gioco): ie1: 122, ie1_s2: 163
 - Elementi scritti nei dati: Mountain: 121, Fire: 135, Wind: 157, Forest: 171
@@ -36,7 +33,6 @@ Non modificare a mano: si rigenera a ogni importazione.
 ### Inazuma Eleven Ares (`ie2`)
 
 - Giocatori: **157**, squadre: **11**, boss: 11, partite speciali: 0, profili: 0
-- Importanza: protagonista: 26, conosciuto: 49, comune: 82
 - Mosse per giocatore (numero: giocatori): 0: 1, 2: 1, 3: 8, 4: 147
 - Elementi scritti nei dati: Wind: 42, Mountain: 33, Fire: 38, Forest: 44
 - Senza statistiche Lv50: nessuno
@@ -45,7 +41,6 @@ Non modificare a mano: si rigenera a ogni importazione.
 ### Inazuma Eleven Orion (`orion`)
 
 - Giocatori: **309**, squadre: **24**, boss: 13, partite speciali: 0, profili: 329
-- Importanza: protagonista: 100, conosciuto: 58, comune: 151
 - Mosse per giocatore (numero: giocatori): 2: 1, 3: 10, 4: 298
 - Mosse prese da una season precedente (come nel vecchio gioco): ie2: 129
 - Elementi scritti nei dati: Fire: 80, Forest: 79, Mountain: 71, Wind: 79
@@ -55,7 +50,6 @@ Non modificare a mano: si rigenera a ogni importazione.
 ### Svincolati (`free_agents`)
 
 - Giocatori: **1563**, squadre: **1**, boss: 0, partite speciali: 0, profili: 0
-- Importanza: comune: 1553, conosciuto: 10
 - Mosse per giocatore (numero: giocatori): 0: 1563
 - Elementi scritti nei dati: Wind: 393, Mountain: 367, Forest: 394, Fire: 409
 - Senza statistiche Lv50: nessuno

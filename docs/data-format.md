@@ -49,6 +49,8 @@ Campi originali (id, nome, `portraitUrl`, ruolo, elemento, squadre...) piu':
   `signatureMoveInherited: true` se veniva da `inheritedPlayers`.
 
 ## Importanza
+**Per ora non si usa**: il campo resta nei dati ma non entra in formule, interfaccia o report.
+
 Regola (in `importance-rules.json`): si guardano `legacy.category` e `legacy.finalOverall` e vale il piu' alto:
 
 | category | finalOverall | importanza |

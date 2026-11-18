@@ -2,8 +2,6 @@
 import fs from "node:fs";
 import { missingStatsReason } from "./player-enrich.js";
 
-const IMPORTANCE_LABELS = ["comune", "conosciuto", "protagonista"];
-
 function countBy(items, keyOf) {
   const counts = {};
   for (const item of items) {
@@ -29,7 +27,6 @@ function summarizeSource(source, statsDb) {
     missingMoves: players.filter((p) => p.moves.length === 0).map((p) => ({ playerId: String(p.playerId), name: p.name })),
     movesInherited: countBy(players.filter((p) => p.movesFromSeason), (p) => p.movesFromSeason),
     movesPerPlayer: countBy(players, (p) => p.moves.length),
-    importance: countBy(players, (p) => IMPORTANCE_LABELS[p.importance]),
     elements: countBy(players, (p) => p.element),
   };
 }
@@ -45,7 +42,6 @@ function sourceSection(source) {
   const lines = [`### ${source.name} (\`${source.id}\`)`, ""];
   lines.push(`- Giocatori: **${source.players}**, squadre: **${source.teams}**, boss: ${source.bosses}, ` +
     `partite speciali: ${source.specialMatches}, profili: ${source.profiles}`);
-  lines.push(`- Importanza: ${formatCounts(source.importance)}`);
   lines.push(`- Mosse per giocatore (numero: giocatori): ${formatCounts(source.movesPerPlayer)}`);
   if (Object.keys(source.movesInherited).length) {
     lines.push(`- Mosse prese da una season precedente (come nel vecchio gioco): ${formatCounts(source.movesInherited)}`);
