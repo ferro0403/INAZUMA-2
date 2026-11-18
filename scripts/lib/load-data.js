@@ -13,6 +13,7 @@ export function loadBundle(root = ROOT) {
     seasons: index.seasons.map((entry) => at(entry.file)),
     freeAgents: at(index.freeAgents.file),
     statsDb: at(index.stats),
+    elements: at(index.elements),
     statsMissing: at("data/stats-missing.json"),
     playerVisuals: at(index.playerVisuals),
     rtgCampaign: at(index.rtgCampaign),

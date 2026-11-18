@@ -58,7 +58,7 @@ test("il validatore trova id duplicati, riferimenti rotti e statistiche mancanti
   const stats = { a: 1 };
   const season = {
     id: "s",
-    players: [player("1", stats), player("1", stats), player("2", null)],
+    players: [player("1", stats), player("1", stats), player("2", null), { ...player("3", stats), element: "Fuoco" }],
     teams: [{ teamId: "t", playerIds: ["1", "99"] }],
     bossOrder: [{ teamId: "x", startingXIPlayerIds: ["1"] }],
   };
@@ -67,6 +67,7 @@ test("il validatore trova id duplicati, riferimenti rotti e statistiche mancanti
     freeAgents: { id: "fa", players: [] },
     statsDb: { fields: ["a"] },
     statsMissing: { players: [] },
+    elements: { elements: ["Fire"] },
   });
   const has = (text) => errors.some((error) => error.includes(text));
   assert.ok(has("id duplicato in players: 1"));
@@ -74,4 +75,5 @@ test("il validatore trova id duplicati, riferimenti rotti e statistiche mancanti
   assert.ok(has("squadra inesistente x"));
   assert.ok(has("XI non da 11"));
   assert.ok(has("s/2: statistiche mancanti"));
+  assert.ok(has("elemento sconosciuto Fuoco"));
 });
