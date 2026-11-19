@@ -5,7 +5,7 @@ riceve carte (`stats`, `element`, `moves` dai dati) e progressi (`{ rarity, star
 
 | File | Cosa fa |
 |---|---|
-| `progress.js` | rarita' e stelle -> moltiplicatore: `1 + bonus rarita' + stelle x bonus per stella` (si sommano) |
+| `progress.js` | rarita' e stelle -> moltiplicatore: `1 + bonus rarita' + stelle x bonus per stella` (si sommano); un nemico adattato usa invece `{ multiplier }` |
 | `strength.js` | forza in un tipo di scontro = media del gruppo di statistiche x moltiplicatore |
 | `elements.js` | vantaggio di elemento (ciclo), elemento del giocatore o della mossa (`elementFrom`) |
 | `move-bonus.js` | bonus mossa lineare dalla potenza |

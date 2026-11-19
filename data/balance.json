@@ -31,10 +31,10 @@
   "rarities": {
     "note": "Bonus a tutte le statistiche, in ordine dal piu' basso. Si somma al bonus delle stelle. Provvisorio.",
     "list": [
-      { "id": "normal", "name": "Normale", "bonus": 0 },
-      { "id": "rare", "name": "Rara", "bonus": 0.2 },
-      { "id": "legendary", "name": "Leggendaria", "bonus": 0.4 },
-      { "id": "fabled", "name": "Fabled", "bonus": 0.6 }
+      {"id": "normal", "name": "Normale", "bonus": 0},
+      {"id": "rare", "name": "Rara", "bonus": 0.2},
+      {"id": "legendary", "name": "Leggendaria", "bonus": 0.4},
+      {"id": "fabled", "name": "Fabled", "bonus": 0.6}
     ]
   },
   "stars": {
@@ -56,12 +56,7 @@
   },
   "teamPower": {
     "note": "Potenza = media sui titolari di: forza media nei gruppi del posto in cui giocano + bonus medio delle mosse diviso k (cosi' e' nella stessa unita' della forza) * moveWeight. Calcolata, mai salvata.",
-    "groupsBySlotRole": {
-      "FW": ["shot", "dribble"],
-      "MF": ["midfield", "dribble"],
-      "DF": ["defense"],
-      "GK": ["save"]
-    },
+    "groupsBySlotRole": {"FW": ["shot", "dribble"], "MF": ["midfield", "dribble"], "DF": ["defense"], "GK": ["save"]},
     "moveWeight": 1
   },
   "enemy": {
@@ -75,19 +70,156 @@
     "seed": 20261119,
     "duelsPerPair": 20000,
     "tolerance": 2,
-    "kSearch": { "min": 0.3, "max": 0.8, "step": 0.01 },
+    "kSearch": {"min": 0.3, "max": 0.8, "step": 0.01},
     "targets": [
-      { "name": "Rara vs Normale", "a": { "rarity": "rare", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 }, "target": 60 },
-      { "name": "Leggendaria vs Normale", "a": { "rarity": "legendary", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 }, "target": 70 },
-      { "name": "Fabled vs Normale", "a": { "rarity": "fabled", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 }, "target": 80 },
-      { "name": "Fabled 5 stelle vs Normale", "a": { "rarity": "fabled", "stars": 5 }, "b": { "rarity": "normal", "stars": 0 }, "target": 85 }
+      {
+        "name": "Rara vs Normale",
+        "a": {"rarity": "rare", "stars": 0},
+        "b": {"rarity": "normal", "stars": 0},
+        "target": 60
+      },
+      {
+        "name": "Leggendaria vs Normale",
+        "a": {"rarity": "legendary", "stars": 0},
+        "b": {"rarity": "normal", "stars": 0},
+        "target": 70
+      },
+      {
+        "name": "Fabled vs Normale",
+        "a": {"rarity": "fabled", "stars": 0},
+        "b": {"rarity": "normal", "stars": 0},
+        "target": 80
+      },
+      {
+        "name": "Fabled 5 stelle vs Normale",
+        "a": {"rarity": "fabled", "stars": 5},
+        "b": {"rarity": "normal", "stars": 0},
+        "target": 85
+      }
     ],
     "extraPairs": [
-      { "name": "Normale 5 stelle vs Normale", "a": { "rarity": "normal", "stars": 5 }, "b": { "rarity": "normal", "stars": 0 } },
-      { "name": "Leggendaria vs Rara", "a": { "rarity": "legendary", "stars": 0 }, "b": { "rarity": "rare", "stars": 0 } },
-      { "name": "Fabled vs Leggendaria", "a": { "rarity": "fabled", "stars": 0 }, "b": { "rarity": "legendary", "stars": 0 } },
-      { "name": "Fabled 5 stelle vs Fabled", "a": { "rarity": "fabled", "stars": 5 }, "b": { "rarity": "fabled", "stars": 0 } },
-      { "name": "Normale vs Normale", "a": { "rarity": "normal", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 } }
+      {
+        "name": "Normale 5 stelle vs Normale",
+        "a": {"rarity": "normal", "stars": 5},
+        "b": {"rarity": "normal", "stars": 0}
+      },
+      {"name": "Leggendaria vs Rara", "a": {"rarity": "legendary", "stars": 0}, "b": {"rarity": "rare", "stars": 0}},
+      {"name": "Fabled vs Leggendaria", "a": {"rarity": "fabled", "stars": 0}, "b": {"rarity": "legendary", "stars": 0}},
+      {
+        "name": "Fabled 5 stelle vs Fabled",
+        "a": {"rarity": "fabled", "stars": 5},
+        "b": {"rarity": "fabled", "stars": 0}
+      },
+      {"name": "Normale vs Normale", "a": {"rarity": "normal", "stars": 0}, "b": {"rarity": "normal", "stars": 0}}
     ]
+  },
+  "match": {
+    "note": "Regole della partita RTG (riprese dal vecchio gioco, vedi docs/match.md). Provvisorie.",
+    "actions": {"min": 22, "max": 30},
+    "interactiveActions": {
+      "note": "Azioni in cui si possono usare le mosse, scelte a caso con il seme. Tiri, supplementari e rigori lo sono sempre.",
+      "min": 17,
+      "max": 22
+    },
+    "extraTimeActionsPerHalf": 3,
+    "minutes": {"regulation": 90, "extraTime": 30},
+    "zones": {
+      "note": "Zona del pallone -> scontro: gruppo di statistiche e tipo di mossa di chi attacca (actor) e di chi difende (opponent). Chi vince avanza; pick = pesi di ruolo usati per scegliere il giocatore.",
+      "midfield": {
+        "actorGroup": "midfield",
+        "opponentGroup": "midfield",
+        "actorMoveType": "dribble",
+        "opponentMoveType": "defense",
+        "actorPick": "midfield",
+        "opponentPick": "midfield",
+        "next": "attack"
+      },
+      "attack": {
+        "actorGroup": "dribble",
+        "opponentGroup": "defense",
+        "actorMoveType": "dribble",
+        "opponentMoveType": "defense",
+        "actorPick": "dribble",
+        "opponentPick": "defense",
+        "next": "shot"
+      },
+      "shot": {
+        "actorGroup": "shot",
+        "opponentGroup": "save",
+        "actorMoveType": "shot",
+        "opponentMoveType": "save",
+        "actorPick": "shot",
+        "opponentPick": "save",
+        "next": "goal",
+        "alwaysInteractive": true
+      },
+      "start": "midfield",
+      "afterLossInZone": {"midfield": "attack", "attack": "midfield", "shot": "midfield"},
+      "afterGoal": "midfield"
+    },
+    "roleWeights": {
+      "save": {"GK": 1},
+      "defense": {"DF": 1, "MF": 0.38, "FW": 0.04},
+      "shot": {"FW": 1, "MF": 0.28, "DF": 0.02},
+      "dribble": {"FW": 1, "MF": 0.62, "DF": 0.05},
+      "midfield": {"MF": 1, "FW": 0.38, "DF": 0.28}
+    },
+    "playerPick": {
+      "note": "peso = ruolo x forza x recenza x uso. forza = base + min(forza del gruppo, cap)/divisore; recenza per distanza dall'ultima apparizione; uso = 1/(1 + presenze x usagePenalty).",
+      "strengthBase": 0.8,
+      "strengthCap": 120,
+      "strengthDivisor": 300,
+      "recencyByDistance": [0.2, 0.2, 0.5],
+      "excludeLastN": 2,
+      "minFreshCandidates": 2,
+      "usagePenalty": 0.4,
+      "minWeight": 0.01,
+      "historyLength": 6
+    },
+    "movePoints": {
+      "note": "Ogni carta ha gli stessi punti mossa (PT) a partita; una mossa costa quanto la sua potenza. Le mosse di tiro e parata si pagano sempre, dribbling e difesa solo se lo scontro e' vinto.",
+      "perCard": 200,
+      "alwaysPaidTypes": ["shot", "save"]
+    },
+    "ai": {
+      "note": "Probabilita' (%) che l'IA usi una mossa, in base alla sua probabilita' di vincere lo scontro senza mossa, poi bonus e malus.",
+      "chanceByWinProbability": [
+        {"atLeast": 75, "chance": 35},
+        {"atLeast": 60, "chance": 55},
+        {"atLeast": 50, "chance": 70},
+        {"atLeast": 35, "chance": 82},
+        {"atLeast": 0, "chance": 90}
+      ],
+      "lateMinute": 75,
+      "lateNotWinningBonus": 10,
+      "veryLateMinute": 85,
+      "veryLateLosingBonus": 10,
+      "shotSaveBonus": 8,
+      "lateShotSaveMinute": 80,
+      "lateShotSaveBonus": 5,
+      "lastUseBeforeMinute": 50,
+      "lastUseMalus": 5,
+      "maxChance": 95
+    },
+    "penalties": {
+      "note": "5 rigori a testa, poi a oltranza. Senza mosse: tiratore e portiere scelgono una direzione, stessa direzione = parata. Solo il tiratore usa una mossa = gol; solo il portiere = parata; entrambi = scontro tiro contro parata. Dopo maxKicks rigori (praticamente impossibile) decide la sorte, solo per garantire che la partita finisca.",
+      "kicksPerSide": 5,
+      "directions": ["left", "center", "right"],
+      "keeperReadWeight": 2,
+      "minute": 120,
+      "maxKicks": 200
+    }
+  },
+  "difficultyRamp": {
+    "note": "Usato da scripts/build-rtg-difficulty.js per creare data/rtg-difficulty.json: moltiplicatore del nemico dal primo all'ultimo boss, lineare.",
+    "first": {"minMultiplier": 1, "maxMultiplier": 1.2},
+    "last": {"minMultiplier": 1.3, "maxMultiplier": 1.7}
+  },
+  "matchSimulation": {
+    "note": "Usato da scripts/simulate-match.js.",
+    "seed": 20261120,
+    "matchesPerRow": 2000,
+    "formation": "4-4-2",
+    "powerDifferences": [0, 0.1, 0.2, 0.4]
   }
 }

@@ -24,7 +24,12 @@ export function checkStars(stars, balance) {
 }
 
 // Rarita' e stelle si sommano: 1 + bonus rarita' + stelle * bonus per stella.
+// Un moltiplicatore esplicito ({ multiplier }) vale per i nemici adattati, che non hanno rarita'.
 export function progressMultiplier(progress, balance) {
+  if (progress?.multiplier !== undefined) {
+    if (!(progress.multiplier > 0)) throw new Error(`Moltiplicatore non valido: ${progress.multiplier}`);
+    return progress.multiplier;
+  }
   const rarity = findRarity(progress?.rarity, balance);
   const stars = checkStars(progress?.stars, balance);
   return 1 + rarity.bonus + stars * balance.stars.bonusPerStar;

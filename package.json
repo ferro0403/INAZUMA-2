@@ -9,7 +9,9 @@
     "import": "node scripts/import-from-old-repo.js",
     "importance": "node scripts/apply-importance.js",
     "move-powers": "node scripts/apply-move-powers.js",
-    "simulate": "node scripts/simulate.js"
+    "simulate": "node scripts/simulate.js",
+    "simulate-match": "node scripts/simulate-match.js",
+    "build-rtg-difficulty": "node scripts/build-rtg-difficulty.js"
   },
   "engines": { "node": ">=22" }
 }
