@@ -1,0 +1,93 @@
+{
+  "note": "Tutti i numeri del motore. I valori 'provvisori' si fissano con il simulatore (npm run simulate). Vedi docs/engine.md.",
+  "duel": {
+    "note": "Probabilita' di vincere uno scontro: base + k*(forza_attore - forza_avversario) + elemento + mossa, limitata tra min e max.",
+    "k": 0.53,
+    "baseProbability": 50,
+    "minProbability": 5,
+    "maxProbability": 95
+  },
+  "elements": {
+    "note": "Ogni elemento batte il successivo (l'ultimo batte il primo). Elementi fuori dal ciclo (es. Void) sono neutri. elementFrom: 'card' = elemento del giocatore, 'move' = elemento della mossa usata (se c'e'), altrimenti del giocatore.",
+    "cycle": ["Fire", "Forest", "Wind", "Mountain"],
+    "advantageBonus": 5,
+    "elementFrom": "card"
+  },
+  "moveBonus": {
+    "note": "Bonus lineare dalla potenza della mossa. Se anche l'avversario usa una mossa, il suo bonus si sottrae. Provvisorio.",
+    "minPower": 30,
+    "bonusAtMinPower": 4,
+    "maxPower": 100,
+    "bonusAtMaxPower": 13
+  },
+  "statGroups": {
+    "note": "Forza in uno scontro = media delle statistiche del gruppo. Gruppi proposti nel documento, da confermare.",
+    "shot": ["kick", "control"],
+    "dribble": ["technique", "control"],
+    "defense": ["pressure", "physical"],
+    "save": ["physical", "agility"],
+    "midfield": ["intelligence", "pressure"]
+  },
+  "rarities": {
+    "note": "Bonus a tutte le statistiche, in ordine dal piu' basso. Si somma al bonus delle stelle. Provvisorio.",
+    "list": [
+      { "id": "normal", "name": "Normale", "bonus": 0 },
+      { "id": "rare", "name": "Rara", "bonus": 0.2 },
+      { "id": "legendary", "name": "Leggendaria", "bonus": 0.4 },
+      { "id": "fabled", "name": "Fabled", "bonus": 0.6 }
+    ]
+  },
+  "stars": {
+    "note": "Ogni stella (dai doppioni) aggiunge bonusPerStar a tutte le statistiche. Provvisorio.",
+    "bonusPerStar": 0.02,
+    "max": 5
+  },
+  "squad": {
+    "note": "Nessun vincolo di ruolo: ogni giocatore puo' stare in qualsiasi posizione.",
+    "starters": 11,
+    "maxReserves": 4,
+    "limitedRarity": "fabled",
+    "maxLimitedRarityStarters": 2
+  },
+  "rarityProgress": {
+    "note": "Partite IN PIU' per salire di un gradino (Normale->Rara, ->Leggendaria, ->Fabled). Una partita persa vale lossWeight. Usato nella tappa 5. Provvisorio.",
+    "matchesPerStep": [5, 12, 25],
+    "lossWeight": 0.75
+  },
+  "teamPower": {
+    "note": "Potenza = media sui titolari di: forza media nei gruppi del posto in cui giocano + bonus medio delle mosse diviso k (cosi' e' nella stessa unita' della forza) * moveWeight. Calcolata, mai salvata.",
+    "groupsBySlotRole": {
+      "FW": ["shot", "dribble"],
+      "MF": ["midfield", "dribble"],
+      "DF": ["defense"],
+      "GK": ["save"]
+    },
+    "moveWeight": 1
+  },
+  "enemy": {
+    "note": "Il nemico insegue la potenza del giocatore (x followRatio) restando tra la sua potenza base (rarita' Normale, 0 stelle) x minMultiplier e x maxMultiplier. Nessun tetto per il giocatore.",
+    "followRatio": 1,
+    "minMultiplier": 1,
+    "maxMultiplier": 1.7
+  },
+  "calibration": {
+    "note": "Obiettivi del simulatore: scontri tra la stessa carta (ruolo, elemento e mosse uguali), senza mosse, cambiando solo rarita' e stelle. Percentuale di vittoria di 'a' contro 'b'.",
+    "seed": 20261119,
+    "duelsPerPair": 20000,
+    "tolerance": 2,
+    "kSearch": { "min": 0.3, "max": 0.8, "step": 0.01 },
+    "targets": [
+      { "name": "Rara vs Normale", "a": { "rarity": "rare", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 }, "target": 60 },
+      { "name": "Leggendaria vs Normale", "a": { "rarity": "legendary", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 }, "target": 70 },
+      { "name": "Fabled vs Normale", "a": { "rarity": "fabled", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 }, "target": 80 },
+      { "name": "Fabled 5 stelle vs Normale", "a": { "rarity": "fabled", "stars": 5 }, "b": { "rarity": "normal", "stars": 0 }, "target": 85 }
+    ],
+    "extraPairs": [
+      { "name": "Normale 5 stelle vs Normale", "a": { "rarity": "normal", "stars": 5 }, "b": { "rarity": "normal", "stars": 0 } },
+      { "name": "Leggendaria vs Rara", "a": { "rarity": "legendary", "stars": 0 }, "b": { "rarity": "rare", "stars": 0 } },
+      { "name": "Fabled vs Leggendaria", "a": { "rarity": "fabled", "stars": 0 }, "b": { "rarity": "legendary", "stars": 0 } },
+      { "name": "Fabled 5 stelle vs Fabled", "a": { "rarity": "fabled", "stars": 5 }, "b": { "rarity": "fabled", "stars": 0 } },
+      { "name": "Normale vs Normale", "a": { "rarity": "normal", "stars": 0 }, "b": { "rarity": "normal", "stars": 0 } }
+    ]
+  }
+}

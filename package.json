@@ -8,7 +8,8 @@
     "validate": "node scripts/validate-data.js",
     "import": "node scripts/import-from-old-repo.js",
     "importance": "node scripts/apply-importance.js",
-    "move-powers": "node scripts/apply-move-powers.js"
+    "move-powers": "node scripts/apply-move-powers.js",
+    "simulate": "node scripts/simulate.js"
   },
   "engines": { "node": ">=22" }
 }

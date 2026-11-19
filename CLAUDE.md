@@ -6,6 +6,7 @@ Progetto completo: `docs/PROGETTO_NUOVO_GIOCO.md`.
 
 ## Struttura
 - `index.html` + `src/` : il gioco, solo browser e moduli ES (`import`/`export`). **Nessuna build.**
+- `src/engine/` : motore (scontri, forza, potenza, nemici, rosa). Tutti i numeri in `data/balance.json`.
 - `data/` : dati in JSON leggibili (season, svincolati, statistiche, importanza). Vedi `docs/data-format.md`.
 - `scripts/` : importazione, validazione, ricalcolo importanza (Node >= 22, nessuna dipendenza).
 - `tests/` : `npm test` (node:test). Con `OLD_REPO=<percorso>` confronta anche col vecchio repo.
@@ -16,7 +17,8 @@ Progetto completo: `docs/PROGETTO_NUOVO_GIOCO.md`.
 2. **File piccoli** (sotto 400 righe) e **una responsabilita' per file**.
 3. **Season ed eventi sono dati, non codice**: vietato scrivere id di season/evento nel codice (`"ie1"`, `"orion"`,
    `"halloween"`...) e vietato `if (seasonId === ...)`. Il codice legge `data/seasons/index.json` e i campi dei file.
-4. **Dati in JSON leggibili** in `data/`: niente blob compressi o base64 nei `.js`.
+4. **Dati in JSON leggibili** in `data/`: niente blob compressi o base64 nei `.js`. **Numeri del gioco solo in
+   `data/balance.json`**, mai nel codice.
 5. **CSS**: niente `!important`; colori, spazi e raggi solo come variabili in `src/styles/tokens.css`.
 6. **Non inventare dati**: mosse, statistiche e importanza non si assegnano a caso. Le mosse le da' l'utente.
    Se un dato manca si chiede.
@@ -28,5 +30,6 @@ Progetto completo: `docs/PROGETTO_NUOVO_GIOCO.md`.
 - `npm run validate` - controlla i dati (`-- --old <percorso>` per il confronto)
 - `npm run import -- <percorso-vecchio-repo>` - rigenera `data/` dal vecchio repo
 - `npm run importance` - ricalcola l'importanza dopo aver cambiato regole o correzioni
+- `npm run simulate` - simulatore di taratura (`-- --calibrate` cerca il k migliore)
 - `npm run move-powers -- [percorso/PLAYER_MOVES_DATABASE.json]` - potenze originali delle mosse
   (con il percorso rigenera `data/move-powers.json`; il file grande non va nel repo)
