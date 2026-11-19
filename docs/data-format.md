@@ -10,6 +10,7 @@ Tutti i file in `data/` sono JSON leggibili. Quelli marcati *generato* si rifann
 | `free-agents.json` | svincolati | generato |
 | `player-visuals.json` | link ritratto/figura intera per id giocatore (dal Zukan) | generato |
 | `rtg-campaign.json` | costanti di campagna della Road to Glory (premi, campagne) | generato |
+| `elements.json` | nomi degli elementi (in inglese) | a mano |
 | `stats-missing.json` | giocatori senza statistiche Lv50 | generato |
 | `statistiche-ufficiali-lv50.json` | 7 statistiche Lv50 per id (fonte: Zukan) | dato dall'utente |
 | `importance-rules.json` | regola dell'importanza | a mano |
@@ -35,6 +36,11 @@ fascia (`category`), livelli (`level`, `maxLevel`, `bossLevel`, `matchLevel`...)
 Niente e' cancellato: rimettendo i campi `legacy` al loro posto si riottiene il file originale
 (lo controlla `npm run validate -- --old <percorso>`). Il nuovo gioco non deve usare `legacy`, tranne
 il calcolo dell'importanza.
+
+### Elementi
+Sempre in inglese: Fire, Forest, Wind, Mountain (e Void, solo in alcune mosse); elenco in `elements.json`.
+In IE1 erano in italiano (Fuoco, Montagna, Albero, Vento): il nome originale resta in `legacy.element`.
+La tabella di conversione e' in `scripts/import-config.json` (`elementNames`).
 
 ### Un giocatore
 Campi originali (id, nome, `portraitUrl`, ruolo, elemento, squadre...) piu':

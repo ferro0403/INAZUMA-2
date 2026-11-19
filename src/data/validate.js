@@ -96,6 +96,12 @@ function checkReferences(source, ctx, errors) {
   });
 }
 
+function checkElements(source, ctx, errors) {
+  walk(source, source.id, (key, value, path) => {
+    if (key === "element" && !ctx.elements.has(value)) errors.push(`${path}: elemento sconosciuto ${value}`);
+  });
+}
+
 function checkMatches(source, errors) {
   const teams = new Set((source.teams || []).map(teamIdOf));
   const formations = new Set((source.formations?.eleven || []).map((formation) => formation.id));
@@ -119,19 +125,21 @@ function checkFormations(source, errors) {
   }
 }
 
-// bundle: { seasons: [season], freeAgents, statsDb, statsMissing: { players: [...] } }
+// bundle: { seasons: [season], freeAgents, statsDb, statsMissing: { players: [...] }, elements: { elements: [...] } }
 export function validateData(bundle) {
   const errors = [];
   const ctx = {
     statFields: bundle.statsDb.fields,
     statsMissing: new Set(bundle.statsMissing.players.map((entry) => `${entry.source}/${entry.playerId}`)),
     freeAgentIds: new Set(bundle.freeAgents.players.map(idOf)),
+    elements: new Set(bundle.elements.elements),
   };
   for (const source of [...bundle.seasons, bundle.freeAgents]) {
     checkUnique(source, errors);
     checkStats(source, ctx, errors);
     checkPlayerFields(source, errors);
     checkReferences(source, ctx, errors);
+    checkElements(source, ctx, errors);
     checkMatches(source, errors);
     checkFormations(source, errors);
   }

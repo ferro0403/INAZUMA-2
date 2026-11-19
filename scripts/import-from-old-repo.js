@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson, writeJson } from "./lib/json-io.js";
 import { makeLegacyKeyTest } from "./lib/legacy.js";
+import { translateElements } from "./lib/elements.js";
 import { openOldRepo, readFourMoves, readRtgConfig, readSeasonDisplay } from "./lib/old-repo.js";
 import { SCHEMA_VERSION, buildFreeAgents, buildSeason } from "./lib/build-season.js";
 import { collectFindings, writeReport } from "./lib/import-report.js";
@@ -44,19 +45,19 @@ function main() {
       fallbackOrder: config.fourMoves.fallbackOrder[entry.id],
       signatureCatalog: old.json(entry.signatureMoves),
     };
-    const season = buildSeason(old.json(entry.database), display, ctx, {
+    const season = translateElements(buildSeason(old.json(entry.database), display, ctx, {
       importedFrom: importedFrom([entry.database, entry.signatureMoves, config.fourMoves.file,
         config.rtgConfig.file]),
       displayTeamNames: config.displayTeamNameOverrides[entry.id],
       rtg: rtg.seasons[entry.id],
-    });
+    }), config.elementNames);
     writeJson(fromRoot("data", "seasons", `${entry.id}.json`), season);
     return season;
   });
 
-  const freeAgents = buildFreeAgents(old.json(config.freeAgents.file),
+  const freeAgents = translateElements(buildFreeAgents(old.json(config.freeAgents.file),
     { ...shared, sourceId: config.freeAgents.id, fourMoves: null, signatureCatalog: null },
-    importedFrom([config.freeAgents.file]));
+    importedFrom([config.freeAgents.file])), config.elementNames);
   writeJson(fromRoot("data", "free-agents.json"), freeAgents);
 
   const visuals = old.json(config.playerVisuals);
@@ -77,6 +78,7 @@ function main() {
     })),
     freeAgents: { id: freeAgents.id, file: "data/free-agents.json" },
     stats: "data/statistiche-ufficiali-lv50.json",
+    elements: "data/elements.json",
     playerVisuals: "data/player-visuals.json",
     rtgCampaign: "data/rtg-campaign.json",
   });

@@ -144,5 +144,19 @@
       "reason": "File di riferimento per mosse non ancora assegnate: non assegna mosse a nessuno."
     }
   ],
-  "oldRepoName": "ferro0403/INAZUMA-ROGUELIKE"
+  "oldRepoName": "ferro0403/INAZUMA-ROGUELIKE",
+  "elementNames": {
+    "note": "Nomi degli elementi uniformati in inglese. Chiave = valore trovato nei vecchi dati, valore = nome nuovo. Il valore originale resta in legacy.",
+    "keys": [
+      "element",
+      "type"
+    ],
+    "map": {
+      "Fuoco": "Fire",
+      "Montagna": "Mountain",
+      "Albero": "Forest",
+      "Bosco": "Forest",
+      "Vento": "Wind"
+    }
+  }
 }

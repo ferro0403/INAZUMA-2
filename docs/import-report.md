@@ -9,7 +9,7 @@ Non modificare a mano: si rigenera a ogni importazione.
 
 - Giocatori: **157**, squadre: **10**, boss: 10, partite speciali: 0, profili: 0
 - Mosse per giocatore (numero: giocatori): 3: 1, 4: 156
-- Elementi scritti nei dati: Fuoco: 33, Montagna: 33, Albero: 51, Vento: 40
+- Elementi scritti nei dati: Fire: 33, Mountain: 33, Forest: 51, Wind: 40
 - Senza statistiche Lv50: nessuno
 - Senza mosse: nessuno
 
