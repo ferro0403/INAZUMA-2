@@ -17,9 +17,12 @@ function main() {
   const bundle = loadBundle();
   const errors = validateData(bundle);
   const oldPath = oldRepoArg(process.argv.slice(2));
+  let expected = [];
   if (oldPath) {
     const config = readJson(path.join(ROOT, "scripts", "import-config.json"));
-    errors.push(...checkParity(bundle, openOldRepo(oldPath), config));
+    const parity = checkParity(bundle, openOldRepo(oldPath), config);
+    errors.push(...parity.errors);
+    expected = parity.expected;
   }
   const players = [...bundle.seasons, bundle.freeAgents].reduce((sum, source) => sum + source.players.length, 0);
   if (errors.length) {
@@ -27,7 +30,9 @@ function main() {
     console.error(`\n${errors.length} errori.`);
     process.exit(1);
   }
-  const parity = oldPath ? " e uguali al vecchio repo" : " (confronto col vecchio repo saltato: usa --old)";
+  const parity = oldPath
+    ? ` e uguali al vecchio repo (a parte ${expected.length} potenze di mosse cambiate come atteso)`
+    : " (confronto col vecchio repo saltato: usa --old)";
   console.log(`Dati validi${parity}: ${bundle.seasons.length} season + svincolati, ${players} giocatori.`);
 }
 

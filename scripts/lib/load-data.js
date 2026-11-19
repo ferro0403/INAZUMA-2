@@ -14,6 +14,8 @@ export function loadBundle(root = ROOT) {
     freeAgents: at(index.freeAgents.file),
     statsDb: at(index.stats),
     elements: at(index.elements),
+    movePowers: at(index.movePowers),
+    movePowerOverrides: at(index.movePowerOverrides),
     statsMissing: at("data/stats-missing.json"),
     playerVisuals: at(index.playerVisuals),
     rtgCampaign: at(index.rtgCampaign),

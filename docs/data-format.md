@@ -10,6 +10,8 @@ Tutti i file in `data/` sono JSON leggibili. Quelli marcati *generato* si rifann
 | `free-agents.json` | svincolati | generato |
 | `player-visuals.json` | link ritratto/figura intera per id giocatore (dal Zukan) | generato |
 | `rtg-campaign.json` | costanti di campagna della Road to Glory (premi, campagne) | generato |
+| `move-powers.json` | potenza e tension ORIGINALI di ogni mossa (da PLAYER_MOVES_DATABASE.json) | generato (`npm run move-powers -- <file>`) |
+| `move-power-overrides.json` | potenze decise dall'utente per mosse usate senza potenza nel file | a mano |
 | `elements.json` | nomi degli elementi (in inglese) | a mano |
 | `stats-missing.json` | giocatori senza statistiche Lv50 | generato |
 | `statistiche-ufficiali-lv50.json` | 7 statistiche Lv50 per id (fonte: Zukan) | dato dall'utente |
@@ -48,10 +50,13 @@ Campi originali (id, nome, `portraitUrl`, ruolo, elemento, squadre...) piu':
 - `stats`: `{ kick, control, technique, pressure, physical, agility, intelligence }` Lv50, oppure `null`
   se mancano (elencati in `stats-missing.json`);
 - `importance`: 0 comune, 1 conosciuto, 2 protagonista; `importanceSource`: `rule` o `override`;
-- `moves`: 2-4 mosse `{ name, type, element, power }` gia' assegnate nel vecchio gioco (RTG). Lista vuota se
+- `moves`: 2-4 mosse `{ name, type, element, power }` gia' assegnate nel vecchio gioco (RTG). `power` e' la
+  potenza ORIGINALE (max 100) presa da `move-powers.json` per nome + tipo + elemento, o da
+  `move-power-overrides.json`; la potenza modificata a mano nel vecchio gioco resta in `legacy.power`. Lista vuota se
   non ci sono: le assegna l'utente. `movesFromSeason` se le mosse vengono da una season precedente
   (come faceva il vecchio gioco, ordine in `scripts/import-config.json`);
-- `signatureMove`: la mossa singola usata dalla vecchia run classica (`null` se assente);
+- `signatureMove`: la mossa singola usata dalla vecchia run classica (`null` se assente), con la stessa regola
+  per `power` (anche nelle varianti per ruolo `roleMoves`);
   `signatureMoveInherited: true` se veniva da `inheritedPlayers`.
 
 ## Importanza
