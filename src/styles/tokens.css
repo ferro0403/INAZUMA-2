@@ -1,0 +1,16 @@
+/* Unico file con valori di colore, spazi e raggi. Gli altri CSS usano solo queste variabili. */
+:root {
+  --color-bg: #0f1420;
+  --color-surface: #1a2233;
+  --color-text: #eef2f8;
+  --color-text-muted: #9aa6bb;
+  --color-accent: #f5b700;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+
+  --radius-card: 12px;
+  --font-body: system-ui, sans-serif;
+}

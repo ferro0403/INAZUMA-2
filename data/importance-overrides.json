@@ -1,0 +1,5 @@
+{
+  "note": "Correzioni a mano dell'importanza. 'players' vale in tutte le season e negli svincolati; 'seasonPlayers' (chiave season/id, es. \"ie1/12\", oppure \"free_agents/2214\") vale solo li' e vince su 'players'. Valori: 0 comune, 1 conosciuto, 2 protagonista. Dopo una modifica: npm run importance",
+  "players": {},
+  "seasonPlayers": {}
+}

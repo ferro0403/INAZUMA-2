@@ -1,0 +1,14 @@
+{
+  "note": "Regola per l'importanza (0 comune, 1 conosciuto, 2 protagonista). Si calcola dai valori del vecchio gioco salvati in player.legacy (category e finalOverall): vale il piu' alto dei due risultati. Dopo una modifica: npm run importance",
+  "levels": { "0": "comune", "1": "conosciuto", "2": "protagonista" },
+  "byCategory": {
+    "Debole": 0, "Normale": 0, "Buono": 0, "Forte": 0,
+    "Elite": 1,
+    "Mondiale": 2, "Leggenda": 2
+  },
+  "byFinalOverall": [
+    { "atLeast": 90, "importance": 2 },
+    { "atLeast": 85, "importance": 1 },
+    { "atLeast": 0, "importance": 0 }
+  ]
+}

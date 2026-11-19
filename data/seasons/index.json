@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "note": "Elenco e ordine delle season. Aggiungere una season = aggiungere una riga qui e il suo file.",
+  "seasons": [
+    {"id": "ie1", "name": "Inazuma Eleven 1", "displaySeasonNumber": "1", "file": "data/seasons/ie1.json"},
+    {"id": "ie1_s2", "name": "Inazuma Eleven 2", "displaySeasonNumber": "2", "file": "data/seasons/ie1_s2.json"},
+    {"id": "ie1_s3", "name": "Inazuma Eleven 3", "displaySeasonNumber": "3", "file": "data/seasons/ie1_s3.json"},
+    {"id": "ie2", "name": "Inazuma Eleven Ares", "displaySeasonNumber": "1", "file": "data/seasons/ie2.json"},
+    {"id": "orion", "name": "Inazuma Eleven Orion", "displaySeasonNumber": "1", "file": "data/seasons/orion.json"}
+  ],
+  "freeAgents": {"id": "free_agents", "file": "data/free-agents.json"},
+  "stats": "data/statistiche-ufficiali-lv50.json",
+  "playerVisuals": "data/player-visuals.json",
+  "rtgCampaign": "data/rtg-campaign.json"
+}
