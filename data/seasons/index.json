@@ -10,6 +10,7 @@
   ],
   "freeAgents": {"id": "free_agents", "file": "data/free-agents.json"},
   "stats": "data/statistiche-ufficiali-lv50.json",
+  "elements": "data/elements.json",
   "playerVisuals": "data/player-visuals.json",
   "rtgCampaign": "data/rtg-campaign.json"
 }
