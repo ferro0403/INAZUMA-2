@@ -13,5 +13,7 @@ const oldPath = process.env.OLD_REPO;
 test("dati, ordine partite, mosse e link immagini uguali al vecchio repo", { skip: !oldPath && "OLD_REPO non impostato" },
   () => {
     const config = readJson(path.join(ROOT, "scripts", "import-config.json"));
-    assert.deepEqual(checkParity(loadBundle(), openOldRepo(oldPath), config), []);
+    const { errors, expected } = checkParity(loadBundle(), openOldRepo(oldPath), config);
+    assert.deepEqual(errors, []);
+    assert.ok(expected.length > 0, "le potenze cambiate devono comparire come attese");
   });

@@ -2,6 +2,7 @@
 // e togliendo i campi nuovi, devono essere IDENTICI a quelli originali (link compresi).
 import { isDeepStrictEqual } from "node:util";
 import { readFourMoves, readRtgConfig } from "./old-repo.js";
+import { makePowerLookup, moveKey } from "./move-powers.js";
 
 export const ADDED_PLAYER_FIELDS = ["stats", "importance", "importanceSource", "moves", "movesFromSeason",
   "signatureMove", "signatureMoveInherited"];
@@ -54,7 +55,8 @@ function sameMultiset(a, b) {
   return isDeepStrictEqual([...a].sort(), [...b].sort());
 }
 
-function checkSeason(season, entry, old, rtg, fourMoves, config, errors) {
+function checkSeason(season, entry, old, shared, errors, expected) {
+  const { rtg, fourMoves, config, lookup } = shared;
   const oldDb = old.json(entry.database);
   const label = season.id;
   const oldOrder = oldDb.bossOrder.map((boss) => boss.teamId);
@@ -67,10 +69,31 @@ function checkSeason(season, entry, old, rtg, fourMoves, config, errors) {
   if (diff) errors.push(`${label}: dati diversi dal vecchio in ${diff}`);
   const rtgDiff = firstDifference({ ...mergeLegacy(season.rtg), seasonId: season.id }, rtg.seasons[season.id]);
   if (rtgDiff) errors.push(`${label}: configurazione RTG diversa dal vecchio in ${rtgDiff}`);
-  checkMoves(season, old.json(entry.signatureMoves), fourMoves, config, errors);
+  checkMoves(season, old.json(entry.signatureMoves), fourMoves, config, { errors, expected, lookup });
 }
 
-function checkMoves(season, catalog, fourMoves, config, errors) {
+function* movesWithRoles(moves) {
+  for (const move of moves) {
+    if (!move) continue;
+    yield move;
+    yield* Object.values(move.roleMoves || {});
+  }
+}
+
+// Potenze cambiate rispetto al vecchio: attese solo se uguali a quelle originali (tabella o override).
+function checkPowers(label, moves, ctx) {
+  for (const move of movesWithRoles(moves)) {
+    const original = ctx.lookup(move);
+    if (!original || move.power !== original.power) {
+      ctx.errors.push(`${label}: ${moveKey(move)} ha potenza ${move.power}, attesa ${original?.power}`);
+    } else if (move.legacy?.power !== move.power) {
+      ctx.expected.push(`${label}: ${moveKey(move)} ${move.legacy?.power} -> ${move.power}`);
+    }
+  }
+}
+
+// Stesse mosse del vecchio gioco (nome, tipo, elemento, ordine); solo la potenza puo' cambiare.
+function checkMoves(season, catalog, fourMoves, config, ctx) {
   const order = config.fourMoves.fallbackOrder[season.id];
   for (const player of season.players) {
     const id = String(player.playerId);
@@ -79,14 +102,21 @@ function checkMoves(season, catalog, fourMoves, config, errors) {
       const [name, type, element, power] = fourMoves.d[index];
       return { name, type, element, power };
     });
-    if (!isDeepStrictEqual(player.moves, expected)) errors.push(`${season.id}/${id}: mosse diverse dal vecchio`);
+    const label = `${season.id}/${id}`;
+    if (!isDeepStrictEqual(mergeLegacy(player.moves), expected)) ctx.errors.push(`${label}: mosse diverse dal vecchio`);
     const signature = catalog.players?.[id] ?? catalog.inheritedPlayers?.[id] ?? null;
-    if (!isDeepStrictEqual(player.signatureMove, signature)) errors.push(`${season.id}/${id}: mossa singola diversa`);
+    if (!isDeepStrictEqual(mergeLegacy(player.signatureMove ?? null), signature)) {
+      ctx.errors.push(`${label}: mossa singola diversa`);
+    }
+    checkPowers(label, [...player.moves, player.signatureMove], ctx);
   }
 }
 
+// Restituisce { errors, expected }: expected = potenze cambiate come previsto (non sono errori).
 export function checkParity(bundle, old, config) {
   const errors = [];
+  const expected = [];
+  const lookup = makePowerLookup(bundle.movePowers, bundle.movePowerOverrides);
   const rtg = readRtgConfig(old, config.rtgConfig);
   const fourMoves = readFourMoves(old, config.fourMoves);
   const importedIds = bundle.seasons.map((season) => season.id);
@@ -95,7 +125,7 @@ export function checkParity(bundle, old, config) {
   }
   for (const entry of config.seasons) {
     const season = bundle.seasons.find((item) => item.id === entry.id);
-    if (season) checkSeason(season, entry, old, rtg, fourMoves, config, errors);
+    if (season) checkSeason(season, entry, old, { rtg, fourMoves, config, lookup }, errors, expected);
   }
   const oldFreeAgents = old.json(config.freeAgents.file);
   const faDiff = firstDifference(restoreFreeAgents(bundle.freeAgents), oldFreeAgents);
@@ -106,5 +136,5 @@ export function checkParity(bundle, old, config) {
   for (const name of config.rtgConfig.constants) {
     if (!isDeepStrictEqual(bundle.rtgCampaign[name], rtg.constants[name])) errors.push(`rtg-campaign: ${name} diverso`);
   }
-  return errors;
+  return { errors, expected };
 }

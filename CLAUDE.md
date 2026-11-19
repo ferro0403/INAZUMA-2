@@ -28,3 +28,5 @@ Progetto completo: `docs/PROGETTO_NUOVO_GIOCO.md`.
 - `npm run validate` - controlla i dati (`-- --old <percorso>` per il confronto)
 - `npm run import -- <percorso-vecchio-repo>` - rigenera `data/` dal vecchio repo
 - `npm run importance` - ricalcola l'importanza dopo aver cambiato regole o correzioni
+- `npm run move-powers -- [percorso/PLAYER_MOVES_DATABASE.json]` - potenze originali delle mosse
+  (con il percorso rigenera `data/move-powers.json`; il file grande non va nel repo)

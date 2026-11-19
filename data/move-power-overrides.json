@@ -1,0 +1,11 @@
+{
+  "note": "Potenze decise dall'utente per le mosse usate dai giocatori che nel file originale non hanno potenza. Chiave = nome della mossa (vale per ogni tipo/elemento con quel nome). Non aggiungere valori inventati.",
+  "byName": {
+    "Beyond the Death Zone": 100,
+    "Cosmic Blaster": 100,
+    "Icebreaker": 100,
+    "Majin Merge": 100,
+    "Shadow Guard": 100,
+    "Triple Blizzard": 100
+  }
+}

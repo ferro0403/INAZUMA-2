@@ -4,6 +4,7 @@ const PLAYER_REF_KEY = /^(playerId|.*PlayerIds|playerIds|guaranteedPlayerId)$/;
 const PROFILE_REF_KEY = /^(profileId|.*ProfileIds|profileIds|.*ProfileId)$/;
 const STRICT_SECTIONS = new Set(["teams", "bossOrder", "specialMatches", "profiles", "profileUpgradePaths"]);
 const MAX_MOVES = 4;
+const MAX_POWER = 100;
 
 const SKIPPED_KEYS = new Set(["legacy", "identityModel"]);
 const idOf = (item) => String(item?.playerId ?? item?.id ?? "");
@@ -61,6 +62,12 @@ function checkStats(source, ctx, errors) {
   }
 }
 
+function checkMove(key, move, errors) {
+  const ok = ["name", "type", "element"].every((field) => typeof move[field] === "string" && move[field])
+    && Number.isFinite(move.power) && move.power > 0 && move.power <= MAX_POWER;
+  if (!ok) errors.push(`${key}: mossa non valida ${JSON.stringify(move)}`);
+}
+
 function checkPlayerFields(source, errors) {
   for (const player of source.players) {
     const key = `${source.id}/${idOf(player)}`;
@@ -69,11 +76,9 @@ function checkPlayerFields(source, errors) {
       errors.push(`${key}: lista mosse non valida`);
       continue;
     }
-    for (const move of player.moves) {
-      const ok = ["name", "type", "element"].every((field) => typeof move[field] === "string" && move[field])
-        && (move.power === null || Number.isFinite(move.power));
-      if (!ok) errors.push(`${key}: mossa non valida ${JSON.stringify(move)}`);
-    }
+    const sig = player.signatureMove;
+    const signature = sig ? [sig, ...Object.values(sig.roleMoves || {})] : [];
+    for (const move of [...player.moves, ...signature]) checkMove(key, move, errors);
   }
 }
 

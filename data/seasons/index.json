@@ -11,6 +11,8 @@
   "freeAgents": {"id": "free_agents", "file": "data/free-agents.json"},
   "stats": "data/statistiche-ufficiali-lv50.json",
   "elements": "data/elements.json",
+  "movePowers": "data/move-powers.json",
+  "movePowerOverrides": "data/move-power-overrides.json",
   "playerVisuals": "data/player-visuals.json",
   "rtgCampaign": "data/rtg-campaign.json"
 }

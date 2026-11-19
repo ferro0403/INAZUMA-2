@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { readJson, writeJson } from "./lib/json-io.js";
 import { makeLegacyKeyTest } from "./lib/legacy.js";
 import { translateElements } from "./lib/elements.js";
+import { applyPowersToSeason, makePowerLookup } from "./lib/move-powers.js";
 import { openOldRepo, readFourMoves, readRtgConfig, readSeasonDisplay } from "./lib/old-repo.js";
 import { SCHEMA_VERSION, buildFreeAgents, buildSeason } from "./lib/build-season.js";
 import { collectFindings, writeReport } from "./lib/import-report.js";
@@ -35,6 +36,10 @@ function main() {
   const rtg = readRtgConfig(old, config.rtgConfig);
   const fourMoves = readFourMoves(old, config.fourMoves);
 
+  // Potenze originali delle mosse (data/move-powers.json + override): vedi scripts/apply-move-powers.js
+  const powerLookup = makePowerLookup(readJson(fromRoot("data", "move-powers.json")),
+    readJson(fromRoot("data", "move-power-overrides.json")));
+
   const seasons = config.seasons.map((entry) => {
     const display = displays.find((item) => item.id === entry.id);
     if (!display) throw new Error(`Season ${entry.id} assente in ${config.seasonRegistry.file}`);
@@ -51,8 +56,9 @@ function main() {
       displayTeamNames: config.displayTeamNameOverrides[entry.id],
       rtg: rtg.seasons[entry.id],
     }), config.elementNames);
-    writeJson(fromRoot("data", "seasons", `${entry.id}.json`), season);
-    return season;
+    const seasonWithPowers = applyPowersToSeason(season, powerLookup);
+    writeJson(fromRoot("data", "seasons", `${entry.id}.json`), seasonWithPowers);
+    return seasonWithPowers;
   });
 
   const freeAgents = translateElements(buildFreeAgents(old.json(config.freeAgents.file),
@@ -79,6 +85,8 @@ function main() {
     freeAgents: { id: freeAgents.id, file: "data/free-agents.json" },
     stats: "data/statistiche-ufficiali-lv50.json",
     elements: "data/elements.json",
+    movePowers: "data/move-powers.json",
+    movePowerOverrides: "data/move-power-overrides.json",
     playerVisuals: "data/player-visuals.json",
     rtgCampaign: "data/rtg-campaign.json",
   });
