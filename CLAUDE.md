@@ -7,6 +7,8 @@ Progetto completo: `docs/PROGETTO_NUOVO_GIOCO.md`.
 ## Struttura
 - `index.html` + `src/` : il gioco, solo browser e moduli ES (`import`/`export`). **Nessuna build.**
 - `src/engine/` : motore (scontri, forza, potenza, nemici, rosa). Tutti i numeri in `data/balance.json`.
+- `src/match/` : partita RTG (azioni, mosse, IA, intervallo, supplementari, rigori). Vedi `docs/match.md`.
+- `src/cards/` : identita' della carta = fonte (season o svincolati) + id giocatore.
 - `data/` : dati in JSON leggibili (season, svincolati, statistiche, importanza). Vedi `docs/data-format.md`.
 - `scripts/` : importazione, validazione, ricalcolo importanza (Node >= 22, nessuna dipendenza).
 - `tests/` : `npm test` (node:test). Con `OLD_REPO=<percorso>` confronta anche col vecchio repo.
@@ -31,5 +33,7 @@ Progetto completo: `docs/PROGETTO_NUOVO_GIOCO.md`.
 - `npm run import -- <percorso-vecchio-repo>` - rigenera `data/` dal vecchio repo
 - `npm run importance` - ricalcola l'importanza dopo aver cambiato regole o correzioni
 - `npm run simulate` - simulatore di taratura (`-- --calibrate` cerca il k migliore)
+- `npm run simulate-match` - partite IA contro IA, tabella per differenza di potenza
+- `npm run build-rtg-difficulty` - crea `data/rtg-difficulty.json` (`-- --force` per rifarlo)
 - `npm run move-powers -- [percorso/PLAYER_MOVES_DATABASE.json]` - potenze originali delle mosse
   (con il percorso rigenera `data/move-powers.json`; il file grande non va nel repo)
